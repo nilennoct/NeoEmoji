@@ -8,6 +8,8 @@
 
 #import "NPImagesController.h"
 #import "NPImageWrapper.h"
+#import "NECategory.h"
+#import "NEDataManager.h"
 
 @implementation NPImagesController {
     NSMutableArray *_tStorage;
@@ -16,14 +18,14 @@
 - (instancetype)initWithCoder:(NSCoder *)coder {
     if (self = [super initWithCoder:coder]) {
         _tStorage = [NSMutableArray array];
-        [self readData];
+//        [self readData];
     }
 
     return self;
 }
 
 - (void)awakeFromNib {
-    [_imageCollectionView registerForDraggedTypes:@[NSFilenamesPboardType]];
+    [_imageCollectionView registerForDraggedTypes:DRAGGED_TYPES];
     [_imageCollectionView setDraggingSourceOperationMask:NSDragOperationCopy forLocal:NO];
     [_imageCollectionView setDraggingSourceOperationMask:NSDragOperationEvery forLocal:YES];
 }
@@ -47,7 +49,7 @@
     @autoreleasepool {
         for (NSString *path in files) {
             NSString *extension = [[path pathExtension] lowercaseString];
-            if ([extension isEqualToString:@"png"] || [extension isEqualToString:@"jpg"] || [extension isEqualToString:@"gif"]) {
+            if ([SUPPORT_IMAGE_TYPES containsObject:extension]) {
                 NPImageWrapper *image = [[NPImageWrapper alloc] initWithPath:path];
                 [self pushObject:image];
             }
@@ -65,11 +67,16 @@
 
 - (NSInteger)commitChanges {
     NSInteger count = [_tStorage count];
+    NECategory *category = self.categoryController.selectedObjects[0];
+
+    [category willChangeValueForKey:@"image"];
 
     if (count > 0) {
         [self addObjects:_tStorage];
 
         [_tStorage removeAllObjects];
+
+        [category didChangeValueForKey:@"image"];
     }
 
     [self writeToFile];
@@ -81,9 +88,15 @@
 - (NSInteger)commitChangesAtIndex:(NSInteger)index {
     NSInteger count = [_tStorage count];
 
+    NECategory *category = self.categoryController.selectedObjects[0];
+
+    [category willChangeValueForKey:@"image"];
+
     if (count > 0) {
         NSIndexSet *insertIndexSet = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(index, count)];
         [self insertObjects:_tStorage atArrangedObjectIndexes:insertIndexSet];
+
+        [category didChangeValueForKey:@"image"];
 
         [_tStorage removeAllObjects];
     }
@@ -93,37 +106,42 @@
     return count;
 }
 
+- (void)rearrangeSelectedObjectsAtIndex:(NSInteger)index {
+    NSIndexSet *selectionIndexes = self.selectionIndexes;
+    NSArray *selectedObjects = self.selectedObjects;
+
+    __block NSUInteger insertIndex = index;
+    [selectionIndexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+        if (idx < index) {
+            insertIndex--;
+        }
+    }];
+
+    NECategory *category = self.categoryController.selectedObjects[0];
+
+    [category willChangeValueForKey:@"image"];
+
+    [self removeObjects:selectedObjects];
+    [self insertObjects:selectedObjects atArrangedObjectIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(insertIndex, [selectedObjects count])]];
+
+    [category didChangeValueForKey:@"image"];
+
+    [self writeToFile];
+}
+
 - (void)revertChanges {
     [_tStorage removeAllObjects];
 }
 
-- (NSString *)getFilepath {
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSApplicationSupportDirectory, NSUserDomainMask, YES);
-    NSString *path = paths[0];
-    NSString *filepath = [path stringByAppendingPathComponent:@"NeoEmoji/data.plist"];
-    NSLog(@"filepath: %@", filepath);
-    return filepath;
-}
-
-- (void)readData {
-
-//    NSArray *dataArray = [NSArray arrayWithContentsOfFile:[self getFilepath]];
-    NSArray *dataArray = [[NSUserDefaults standardUserDefaults] arrayForKey:@"data"];
-//    NSLog(@"%@", dataArray);
-    if ([dataArray count] > 0) {
-        [self dropFiles:dataArray];
-        [self commitChanges];
-    }
-}
-
 - (void)writeToFile {
-    NSMutableArray *dataArray = [NSMutableArray arrayWithCapacity:[self.arrangedObjects count]];
-    [self.arrangedObjects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NPImageWrapper *image = obj;
-        [dataArray addObject:image.path];
-    }];
-
-    [[NSUserDefaults standardUserDefaults] setObject:dataArray forKey:@"data"];
+    [[NEDataManager sharedInstance] writeData:self.categoryController.content forKey:CATEGORY_DATA_KEY];
+//    NSMutableArray *dataArray = [NSMutableArray arrayWithCapacity:[self.arrangedObjects count]];
+//    [self.arrangedObjects enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+//        NPImageWrapper *image = obj;
+//        [dataArray addObject:image.path];
+//    }];
+//
+//    [[NSUserDefaults standardUserDefaults] setObject:dataArray forKey:@"data"];
 //    BOOL result = [dataArray writeToFile:[self getFilepath] atomically:YES];
 //    if (!result) {
 //        NSLog(@"Error when write data to plist");
@@ -131,7 +149,11 @@
 }
 
 - (void)removeObjects:(NSArray *)objects {
+    NECategory *category = self.categoryController.selectedObjects[0];
+
+    [category willChangeValueForKey:@"image"];
     [super removeObjects:objects];
+    [category didChangeValueForKey:@"image"];
 
     [self writeToFile];
 }
@@ -166,34 +188,11 @@
 
 - (BOOL)collectionView:(NSCollectionView *)collectionView acceptDrop:(id<NSDraggingInfo>)draggingInfo index:(NSInteger)index dropOperation:(NSCollectionViewDropOperation)dropOperation {
     if ([[draggingInfo draggingSource] isEqualTo: _imageCollectionView]) {
-        NSIndexSet *selectionIndexes = self.selectionIndexes;
-        NSArray *selectedObjects = self.selectedObjects;
-
-        __block NSUInteger insertIndex = index;
-        [selectionIndexes enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
-            if (idx < index) {
-                insertIndex--;
-            }
-        }];
-        [self removeObjects:selectedObjects];
-        [self insertObjects:selectedObjects atArrangedObjectIndexes:[NSIndexSet indexSetWithIndexesInRange:NSMakeRange(insertIndex, [selectedObjects count])]];
-
-        [self writeToFile];
+        [self rearrangeSelectedObjectsAtIndex:index];
     }
     else {
         [self commitChangesAtIndex:index];
     }
-//    if ( [[pboard types] containsObject:NSFilenamesPboardType] ) {
-//        NSArray *files = [pboard propertyListForType:NSFilenamesPboardType];
-//
-//        NSInteger numberOfImagesToAdd = [self dropFiles:files];
-//
-//        if (numberOfImagesToAdd == 0) {
-//            return NO;
-//        }
-//
-//        [self commitChangesAtIndex:index];
-//    }
 
     return YES;
 }
@@ -208,7 +207,7 @@
     NSOpenPanel *panel = [NSOpenPanel openPanel];
     panel.allowsMultipleSelection = YES;
     panel.canChooseDirectories = NO;
-    panel.allowedFileTypes = @[@"png", @"jpg", @"gif"];
+    panel.allowedFileTypes = SUPPORT_IMAGE_TYPES;
 
     [panel beginSheetModalForWindow:self.imageCollectionView.window completionHandler:^(NSInteger result) {
         if (result == NSFileHandlingPanelOKButton) {
@@ -233,7 +232,7 @@
     [alert addButtonWithTitle:@"OK"];
     [alert addButtonWithTitle:@"Cancel"];
     [alert setMessageText:@"Clear all emojis?"];
-    [alert setInformativeText:@"All emojis will be removed."];
+    [alert setInformativeText:@"All emojis in this category will be removed."];
     alert.alertStyle = NSCriticalAlertStyle;
 
     if ([alert runModal] != NSAlertFirstButtonReturn) {

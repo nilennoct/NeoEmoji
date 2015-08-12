@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface NPImageWrapper : NSObject <NSPasteboardWriting> {
+@interface NPImageWrapper : NSObject <NSPasteboardWriting, NSCoding> {
     NSURL *_URL;
 }
 

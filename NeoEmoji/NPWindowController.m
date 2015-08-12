@@ -27,7 +27,7 @@
 
 - (NSSize)windowWillResize:(NSWindow *)sender toSize:(NSSize)frameSize {
     CGFloat width = frameSize.width;
-    width = floor(width / 50.f) * 50.f;
+    width = floor((width - 40) / 50.f) * 50.f + 40;
 
     return NSMakeSize(width, frameSize.height);
 }

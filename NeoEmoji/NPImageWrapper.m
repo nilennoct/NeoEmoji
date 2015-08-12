@@ -14,12 +14,24 @@ static const NSString *defaultPrefix = @"out/";
 
 - (instancetype)initWithPath:(NSString *)path {
     if (self = [super init]) {
-        _path = path;
+        self.path = path;
+        self.filename = [_path lastPathComponent];
+
         _URL = [NSURL fileURLWithPath:path];
-        _filename = [_path lastPathComponent];
     }
 
     return self;
+}
+
+- (id)initWithCoder:(NSCoder *)aDecoder {
+    NSString *path = [aDecoder decodeObjectForKey:@"path"];
+    self = [self initWithPath:path];
+
+    return self;
+}
+
+- (void)encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.path forKey:@"path"];
 }
 
 #pragma mark NSPasteboardWriting

@@ -8,10 +8,16 @@
 
 #import <Cocoa/Cocoa.h>
 #import "NECollectionView.h"
+#import "NECategoryController.h"
+
+#define DRAGGED_TYPES @[NSFilenamesPboardType, NSURLPboardType]
+#define SUPPORT_IMAGE_TYPES @[@"png", @"jpg", @"gif"]
 
 @interface NPImagesController : NSArrayController <NSCollectionViewDelegate>
 
 @property (weak) IBOutlet NECollectionView *imageCollectionView;
+
+@property (weak) IBOutlet NECategoryController *categoryController;
 
 @property (readonly, getter=isEmpty) BOOL empty;
 @property (nonatomic) BOOL allowsMultipleSelection;
@@ -21,7 +27,6 @@
 - (NSInteger)commitChanges;
 - (void)revertChanges;
 
-- (IBAction)removeWithFile:(id)sender;
 - (IBAction)clear:(id)sender;
 
 @end

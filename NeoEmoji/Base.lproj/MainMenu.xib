@@ -22,11 +22,20 @@
             </connections>
         </customObject>
         <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
-        <arrayController objectClassName="NPImageWrapper" editable="NO" selectsInsertedObjects="NO" avoidsEmptySelection="NO" id="dcl-aq-TFF" customClass="NPImagesController">
+        <arrayController objectClassName="NECategory" selectsInsertedObjects="NO" avoidsEmptySelection="NO" id="Mk7-hh-FB0" customClass="NECategoryController">
+            <declaredKeys>
+                <string>name</string>
+                <string>image</string>
+                <string>emojis</string>
+            </declaredKeys>
+        </arrayController>
+        <arrayController objectClassName="NPImageWrapper" selectsInsertedObjects="NO" avoidsEmptySelection="NO" id="dcl-aq-TFF" customClass="NPImagesController">
             <declaredKeys>
                 <string>path</string>
             </declaredKeys>
             <connections>
+                <binding destination="Mk7-hh-FB0" name="contentArray" keyPath="selection.emojis" id="n3C-sT-l1f"/>
+                <outlet property="categoryController" destination="Mk7-hh-FB0" id="QHW-54-Czf"/>
                 <outlet property="imageCollectionView" destination="DWr-A0-T6X" id="lWO-Q8-SYa"/>
             </connections>
         </arrayController>
@@ -82,7 +91,7 @@
                         <items>
                             <menuItem title="Open…" keyEquivalent="o" id="IAo-SY-fd9">
                                 <connections>
-                                    <action selector="openDocument:" target="-1" id="bVn-NM-KNZ"/>
+                                    <action selector="openDocument:" target="DWr-A0-T6X" id="oot-KY-lyj"/>
                                 </connections>
                             </menuItem>
                             <menuItem isSeparatorItem="YES" id="m54-Is-iLE"/>
@@ -100,13 +109,13 @@
                         <items>
                             <menuItem title="Copy" keyEquivalent="c" id="x3v-GG-iWU">
                                 <connections>
-                                    <action selector="copy:" target="-1" id="G1f-GL-Joy"/>
+                                    <action selector="copy:" target="DWr-A0-T6X" id="05R-UK-N1U"/>
                                     <binding destination="dcl-aq-TFF" name="enabled" keyPath="selectedObjects.@count" id="uem-RM-OUB"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Paste" keyEquivalent="v" id="gVA-U4-sdL">
                                 <connections>
-                                    <action selector="paste:" target="-1" id="UvS-8e-Qdg"/>
+                                    <action selector="paste:" target="DWr-A0-T6X" id="v1e-oL-1JT"/>
                                 </connections>
                             </menuItem>
                             <menuItem title="Delete" id="pa3-QI-u2k">
@@ -114,7 +123,7 @@
 CA
 </string>
                                 <connections>
-                                    <action selector="delete:" target="-1" id="PbB-CB-G33"/>
+                                    <action selector="delete:" target="DWr-A0-T6X" id="tjw-MQ-dy7"/>
                                     <binding destination="dcl-aq-TFF" name="enabled" keyPath="selectedObjects.@count" id="mGp-tk-vOL"/>
                                 </connections>
                             </menuItem>
@@ -128,6 +137,28 @@ CA
                             <menuItem title="Select All" keyEquivalent="a" id="Ruw-6m-B2m">
                                 <connections>
                                     <action selector="selectAll:" target="-1" id="VNm-Mi-diN"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
+                </menuItem>
+                <menuItem title="Category" id="B6R-aa-CTG">
+                    <modifierMask key="keyEquivalentModifierMask"/>
+                    <menu key="submenu" title="Category" id="SnZ-qQ-FvG">
+                        <items>
+                            <menuItem title="Create" keyEquivalent="N" id="Vrj-Du-BI0">
+                                <connections>
+                                    <action selector="add:" target="Mk7-hh-FB0" id="dBk-br-3db"/>
+                                </connections>
+                            </menuItem>
+                            <menuItem title="Remove" id="WDE-L0-k8v">
+                                <string key="keyEquivalent" base64-UTF8="YES">
+CA
+</string>
+                                <modifierMask key="keyEquivalentModifierMask" shift="YES" command="YES"/>
+                                <connections>
+                                    <action selector="remove:" target="Mk7-hh-FB0" id="1Ll-0l-mz5"/>
+                                    <binding destination="Mk7-hh-FB0" name="enabled" keyPath="self.canSelectionBeRemoved" id="V1Q-bd-hYD"/>
                                 </connections>
                             </menuItem>
                         </items>
@@ -161,16 +192,16 @@ CA
         </menu>
         <window title="NeoEmoji" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" showsToolbarButton="NO" animationBehavior="default" id="QvC-M9-y7g">
             <windowStyleMask key="styleMask" titled="YES" closable="YES" resizable="YES" unifiedTitleAndToolbar="YES"/>
-            <rect key="contentRect" x="335" y="390" width="300" height="250"/>
+            <rect key="contentRect" x="335" y="390" width="340" height="250"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
-            <value key="minSize" type="size" width="250" height="250"/>
-            <value key="maxSize" type="size" width="1000" height="600"/>
+            <value key="minSize" type="size" width="290" height="250"/>
+            <value key="maxSize" type="size" width="1040" height="600"/>
             <view key="contentView" id="EiT-Mj-1SZ">
-                <rect key="frame" x="0.0" y="0.0" width="300" height="250"/>
+                <rect key="frame" x="0.0" y="0.0" width="340" height="250"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4IV-gy-8Tn">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="250"/>
+                    <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4IV-gy-8Tn">
+                        <rect key="frame" x="40" y="0.0" width="300" height="250"/>
                         <clipView key="contentView" copiesOnScroll="NO" id="siY-ND-hD1">
                             <rect key="frame" x="1" y="1" width="248" height="158"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -199,7 +230,7 @@ CA
                         </scroller>
                     </scrollView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="cdt-QX-mWs" customClass="NPDragView">
-                        <rect key="frame" x="0.0" y="0.0" width="300" height="250"/>
+                        <rect key="frame" x="40" y="0.0" width="300" height="250"/>
                         <subviews>
                             <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="edG-4f-ZaM">
                                 <rect key="frame" x="30" y="5" width="240" height="240"/>
@@ -220,17 +251,85 @@ CA
                             <outlet property="imagesController" destination="dcl-aq-TFF" id="4MF-nc-fvI"/>
                         </connections>
                     </customView>
+                    <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="40" horizontalPageScroll="10" verticalLineScroll="40" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NMM-QM-Uth">
+                        <rect key="frame" x="0.0" y="0.0" width="40" height="250"/>
+                        <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="sHQ-fx-fi8">
+                            <rect key="frame" x="1" y="17" width="238" height="117"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="40" viewBased="YES" id="fa7-PE-7EH">
+                                    <rect key="frame" x="0.0" y="0.0" width="40" height="0.0"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                    <color key="backgroundColor" red="0.93333333333333335" green="0.93333333333333335" blue="0.93333333333333335" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <tableViewGridLines key="gridStyleMask" vertical="YES"/>
+                                    <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
+                                    <tableColumns>
+                                        <tableColumn width="40" minWidth="40" maxWidth="120" id="i39-tY-d2r">
+                                            <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
+                                                <font key="font" metaFont="smallSystem"/>
+                                                <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
+                                                <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
+                                            </tableHeaderCell>
+                                            <imageCell key="dataCell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="2Zx-8b-Qv1"/>
+                                            <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                            <prototypeCellViews>
+                                                <tableCellView id="5q8-ZI-27l">
+                                                    <rect key="frame" x="0.0" y="0.0" width="44" height="40"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <subviews>
+                                                        <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="yZA-dA-UsW">
+                                                            <rect key="frame" x="4" y="4" width="32" height="32"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="32" id="LLO-9s-Ufs"/>
+                                                                <constraint firstAttribute="width" constant="32" id="itL-Ze-qzz"/>
+                                                            </constraints>
+                                                            <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="NEPlaceholderTemplate" id="QBe-lg-tZS"/>
+                                                            <connections>
+                                                                <binding destination="5q8-ZI-27l" name="value" keyPath="objectValue.image" id="Uie-u6-sQ3"/>
+                                                            </connections>
+                                                        </imageView>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstAttribute="centerY" secondItem="yZA-dA-UsW" secondAttribute="centerY" id="YE1-YJ-Lee"/>
+                                                        <constraint firstItem="yZA-dA-UsW" firstAttribute="leading" secondItem="5q8-ZI-27l" secondAttribute="leading" constant="4" id="jXG-HW-Og6"/>
+                                                    </constraints>
+                                                </tableCellView>
+                                            </prototypeCellViews>
+                                        </tableColumn>
+                                    </tableColumns>
+                                    <connections>
+                                        <binding destination="Mk7-hh-FB0" name="content" keyPath="arrangedObjects" id="YKY-Q6-6YB"/>
+                                        <binding destination="Mk7-hh-FB0" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="YKY-Q6-6YB" id="DYB-ng-CSs"/>
+                                        <outlet property="delegate" destination="Mk7-hh-FB0" id="NjG-2m-3zd"/>
+                                    </connections>
+                                </tableView>
+                            </subviews>
+                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
+                        </clipView>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="Iy6-kI-PFG"/>
+                        </constraints>
+                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="Ifd-tk-lMA">
+                            <rect key="frame" x="1" y="119" width="223" height="15"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="Ioo-Pa-wsj">
+                            <rect key="frame" x="224" y="17" width="15" height="102"/>
+                            <autoresizingMask key="autoresizingMask"/>
+                        </scroller>
+                    </scrollView>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="4IV-gy-8Tn" secondAttribute="trailing" id="3DS-Ne-CbF"/>
-                    <constraint firstItem="4IV-gy-8Tn" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="Nwe-Su-Jev"/>
+                    <constraint firstItem="NMM-QM-Uth" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" id="BwF-lx-aJm"/>
+                    <constraint firstItem="4IV-gy-8Tn" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="40" id="Nwe-Su-Jev"/>
                     <constraint firstItem="4IV-gy-8Tn" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" id="O1i-80-Cha"/>
-                    <constraint firstAttribute="centerY" secondItem="cdt-QX-mWs" secondAttribute="centerY" id="YL8-D9-Ukv"/>
+                    <constraint firstItem="NMM-QM-Uth" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="ipu-Jl-A7d"/>
                     <constraint firstAttribute="bottom" secondItem="4IV-gy-8Tn" secondAttribute="bottom" id="l9G-lH-pjF"/>
-                    <constraint firstAttribute="centerX" secondItem="cdt-QX-mWs" secondAttribute="centerX" id="lFH-Yl-o4J"/>
                     <constraint firstAttribute="trailing" secondItem="cdt-QX-mWs" secondAttribute="trailing" id="oYp-7e-392"/>
                     <constraint firstItem="cdt-QX-mWs" firstAttribute="top" secondItem="EiT-Mj-1SZ" secondAttribute="top" id="sQD-3x-G7W"/>
-                    <constraint firstItem="cdt-QX-mWs" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" id="w1F-Qw-BqP"/>
+                    <constraint firstItem="cdt-QX-mWs" firstAttribute="leading" secondItem="EiT-Mj-1SZ" secondAttribute="leading" constant="40" id="w1F-Qw-BqP"/>
+                    <constraint firstAttribute="bottom" secondItem="NMM-QM-Uth" secondAttribute="bottom" id="yo2-j3-vSM"/>
                     <constraint firstAttribute="bottom" secondItem="cdt-QX-mWs" secondAttribute="bottom" id="z2K-q3-Fmu"/>
                 </constraints>
             </view>
@@ -298,7 +397,7 @@ CA
             <connections>
                 <outlet property="delegate" destination="DcW-Ye-8xa" id="8mz-0E-VuV"/>
             </connections>
-            <point key="canvasLocation" x="291" y="283"/>
+            <point key="canvasLocation" x="300" y="420"/>
         </window>
         <collectionViewItem id="9cD-io-WeH" customClass="NECollectionViewItem">
             <connections>
@@ -343,6 +442,7 @@ CA
         </box>
     </objects>
     <resources>
+        <image name="NEPlaceholderTemplate" width="32" height="32"/>
         <image name="NETrashTemplate" width="16" height="16"/>
         <image name="NPDrop" width="240" height="240"/>
         <image name="NSAddTemplate" width="11" height="11"/>

@@ -22,7 +22,7 @@
     if (self = [super initWithCoder:coder]) {
         self.highlighted = NO;
         [self unregisterDraggedTypes];
-        [self registerForDraggedTypes:@[NSFilenamesPboardType, NSURLPboardType]];
+        [self registerForDraggedTypes:DRAGGED_TYPES];
     }
 
     return self;
