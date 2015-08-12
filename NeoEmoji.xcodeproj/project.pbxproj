@@ -12,6 +12,16 @@
 		B5FCACF51B79CD1100B61630 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5FCACF41B79CD1100B61630 /* Images.xcassets */; };
 		B5FCACF81B79CD1100B61630 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = B5FCACF61B79CD1100B61630 /* MainMenu.xib */; };
 		B5FCAD041B79CD1100B61630 /* NeoEmojiTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FCAD031B79CD1100B61630 /* NeoEmojiTests.m */; };
+		B5FCAD131B79CD8200B61630 /* NPDragView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FCAD0E1B79CD8200B61630 /* NPDragView.m */; };
+		B5FCAD141B79CD8200B61630 /* NPImagesController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FCAD101B79CD8200B61630 /* NPImagesController.m */; };
+		B5FCAD151B79CD8200B61630 /* NPWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FCAD121B79CD8200B61630 /* NPWindowController.m */; };
+		B5FCAD1B1B79D18D00B61630 /* NPImageWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FCAD1A1B79D18D00B61630 /* NPImageWrapper.m */; };
+		B5FCAD1E1B79DF4C00B61630 /* NECellView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FCAD1D1B79DF4C00B61630 /* NECellView.m */; };
+		B5FCAD211B79E50700B61630 /* NECollectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FCAD201B79E50700B61630 /* NECollectionView.m */; };
+		B5FCAD291B7AE91F00B61630 /* DDHotKeyCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FCAD241B7AE91F00B61630 /* DDHotKeyCenter.m */; };
+		B5FCAD2A1B7AE91F00B61630 /* DDHotKeyTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FCAD261B7AE91F00B61630 /* DDHotKeyTextField.m */; };
+		B5FCAD2B1B7AE91F00B61630 /* DDHotKeyUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FCAD281B7AE91F00B61630 /* DDHotKeyUtilities.m */; };
+		B5FCAD301B7AF9FE00B61630 /* NECollectionViewItem.m in Sources */ = {isa = PBXBuildFile; fileRef = B5FCAD2F1B7AF9FE00B61630 /* NECollectionViewItem.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +45,26 @@
 		B5FCACFD1B79CD1100B61630 /* NeoEmojiTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NeoEmojiTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B5FCAD021B79CD1100B61630 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5FCAD031B79CD1100B61630 /* NeoEmojiTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = NeoEmojiTests.m; sourceTree = "<group>"; };
+		B5FCAD0D1B79CD8200B61630 /* NPDragView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPDragView.h; sourceTree = "<group>"; };
+		B5FCAD0E1B79CD8200B61630 /* NPDragView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPDragView.m; sourceTree = "<group>"; };
+		B5FCAD0F1B79CD8200B61630 /* NPImagesController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPImagesController.h; sourceTree = "<group>"; };
+		B5FCAD101B79CD8200B61630 /* NPImagesController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPImagesController.m; sourceTree = "<group>"; };
+		B5FCAD111B79CD8200B61630 /* NPWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPWindowController.h; sourceTree = "<group>"; };
+		B5FCAD121B79CD8200B61630 /* NPWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPWindowController.m; sourceTree = "<group>"; };
+		B5FCAD191B79D18D00B61630 /* NPImageWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NPImageWrapper.h; sourceTree = "<group>"; };
+		B5FCAD1A1B79D18D00B61630 /* NPImageWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NPImageWrapper.m; sourceTree = "<group>"; };
+		B5FCAD1C1B79DF4C00B61630 /* NECellView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NECellView.h; sourceTree = "<group>"; };
+		B5FCAD1D1B79DF4C00B61630 /* NECellView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NECellView.m; sourceTree = "<group>"; };
+		B5FCAD1F1B79E50700B61630 /* NECollectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NECollectionView.h; sourceTree = "<group>"; };
+		B5FCAD201B79E50700B61630 /* NECollectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NECollectionView.m; sourceTree = "<group>"; };
+		B5FCAD231B7AE91F00B61630 /* DDHotKeyCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDHotKeyCenter.h; sourceTree = "<group>"; };
+		B5FCAD241B7AE91F00B61630 /* DDHotKeyCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDHotKeyCenter.m; sourceTree = "<group>"; };
+		B5FCAD251B7AE91F00B61630 /* DDHotKeyTextField.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDHotKeyTextField.h; sourceTree = "<group>"; };
+		B5FCAD261B7AE91F00B61630 /* DDHotKeyTextField.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDHotKeyTextField.m; sourceTree = "<group>"; };
+		B5FCAD271B7AE91F00B61630 /* DDHotKeyUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DDHotKeyUtilities.h; sourceTree = "<group>"; };
+		B5FCAD281B7AE91F00B61630 /* DDHotKeyUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DDHotKeyUtilities.m; sourceTree = "<group>"; };
+		B5FCAD2E1B7AF9FE00B61630 /* NECollectionViewItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NECollectionViewItem.h; sourceTree = "<group>"; };
+		B5FCAD2F1B7AF9FE00B61630 /* NECollectionViewItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NECollectionViewItem.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +106,10 @@
 		B5FCACEC1B79CD1100B61630 /* NeoEmoji */ = {
 			isa = PBXGroup;
 			children = (
+				B5FCAD2C1B7AE92A00B61630 /* lib */,
+				B5FCAD181B79D17D00B61630 /* Model */,
+				B5FCAD171B79CD8F00B61630 /* Controller */,
+				B5FCAD161B79CD8800B61630 /* View */,
 				B5FCACEF1B79CD1100B61630 /* AppDelegate.h */,
 				B5FCACF01B79CD1100B61630 /* AppDelegate.m */,
 				B5FCACF41B79CD1100B61630 /* Images.xcassets */,
@@ -109,6 +143,62 @@
 				B5FCAD021B79CD1100B61630 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		B5FCAD161B79CD8800B61630 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				B5FCAD0D1B79CD8200B61630 /* NPDragView.h */,
+				B5FCAD0E1B79CD8200B61630 /* NPDragView.m */,
+				B5FCAD1C1B79DF4C00B61630 /* NECellView.h */,
+				B5FCAD1D1B79DF4C00B61630 /* NECellView.m */,
+				B5FCAD1F1B79E50700B61630 /* NECollectionView.h */,
+				B5FCAD201B79E50700B61630 /* NECollectionView.m */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		B5FCAD171B79CD8F00B61630 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				B5FCAD0F1B79CD8200B61630 /* NPImagesController.h */,
+				B5FCAD101B79CD8200B61630 /* NPImagesController.m */,
+				B5FCAD111B79CD8200B61630 /* NPWindowController.h */,
+				B5FCAD121B79CD8200B61630 /* NPWindowController.m */,
+				B5FCAD2E1B7AF9FE00B61630 /* NECollectionViewItem.h */,
+				B5FCAD2F1B7AF9FE00B61630 /* NECollectionViewItem.m */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		B5FCAD181B79D17D00B61630 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				B5FCAD191B79D18D00B61630 /* NPImageWrapper.h */,
+				B5FCAD1A1B79D18D00B61630 /* NPImageWrapper.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		B5FCAD2C1B7AE92A00B61630 /* lib */ = {
+			isa = PBXGroup;
+			children = (
+				B5FCAD2D1B7AE93600B61630 /* DDHotKey */,
+			);
+			name = lib;
+			sourceTree = "<group>";
+		};
+		B5FCAD2D1B7AE93600B61630 /* DDHotKey */ = {
+			isa = PBXGroup;
+			children = (
+				B5FCAD231B7AE91F00B61630 /* DDHotKeyCenter.h */,
+				B5FCAD241B7AE91F00B61630 /* DDHotKeyCenter.m */,
+				B5FCAD251B7AE91F00B61630 /* DDHotKeyTextField.h */,
+				B5FCAD261B7AE91F00B61630 /* DDHotKeyTextField.m */,
+				B5FCAD271B7AE91F00B61630 /* DDHotKeyUtilities.h */,
+				B5FCAD281B7AE91F00B61630 /* DDHotKeyUtilities.m */,
+			);
+			name = DDHotKey;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,6 +250,11 @@
 				TargetAttributes = {
 					B5FCACE91B79CD1100B61630 = {
 						CreatedOnToolsVersion = 6.4;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
 					};
 					B5FCACFC1B79CD1100B61630 = {
 						CreatedOnToolsVersion = 6.4;
@@ -210,8 +305,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5FCAD131B79CD8200B61630 /* NPDragView.m in Sources */,
+				B5FCAD2A1B7AE91F00B61630 /* DDHotKeyTextField.m in Sources */,
 				B5FCACF31B79CD1100B61630 /* main.m in Sources */,
+				B5FCAD2B1B7AE91F00B61630 /* DDHotKeyUtilities.m in Sources */,
 				B5FCACF11B79CD1100B61630 /* AppDelegate.m in Sources */,
+				B5FCAD1B1B79D18D00B61630 /* NPImageWrapper.m in Sources */,
+				B5FCAD301B7AF9FE00B61630 /* NECollectionViewItem.m in Sources */,
+				B5FCAD151B79CD8200B61630 /* NPWindowController.m in Sources */,
+				B5FCAD1E1B79DF4C00B61630 /* NECellView.m in Sources */,
+				B5FCAD141B79CD8200B61630 /* NPImagesController.m in Sources */,
+				B5FCAD291B7AE91F00B61630 /* DDHotKeyCenter.m in Sources */,
+				B5FCAD211B79E50700B61630 /* NECollectionView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
