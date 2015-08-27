@@ -7,7 +7,12 @@
 //
 
 #import <Cocoa/Cocoa.h>
+#import "NEPreviewView.h"
 
 @interface NECollectionView : NSCollectionView
+
+@property NSInteger numberOfColumns;
+
+@property (weak) IBOutlet NEPreviewView *previewView;
 
 @end

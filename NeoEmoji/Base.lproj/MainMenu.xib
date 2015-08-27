@@ -13,6 +13,7 @@
         <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <customObject id="DcW-Ye-8xa" customClass="NPWindowController">
             <connections>
+                <outlet property="imagesController" destination="dcl-aq-TFF" id="3my-WP-Okr"/>
                 <outlet property="window" destination="QvC-M9-y7g" id="BeJ-Yi-7yP"/>
             </connections>
         </customObject>
@@ -196,13 +197,13 @@ CA
             <rect key="screenRect" x="0.0" y="0.0" width="1280" height="777"/>
             <value key="minSize" type="size" width="290" height="250"/>
             <value key="maxSize" type="size" width="1040" height="600"/>
-            <view key="contentView" id="EiT-Mj-1SZ">
+            <view key="contentView" autoresizesSubviews="NO" id="EiT-Mj-1SZ">
                 <rect key="frame" x="0.0" y="0.0" width="340" height="250"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" hasVerticalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4IV-gy-8Tn">
+                    <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="50" horizontalPageScroll="50" verticalLineScroll="50" verticalPageScroll="50" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" horizontalScrollElasticity="none" translatesAutoresizingMaskIntoConstraints="NO" id="4IV-gy-8Tn">
                         <rect key="frame" x="40" y="0.0" width="300" height="250"/>
-                        <clipView key="contentView" copiesOnScroll="NO" id="siY-ND-hD1">
+                        <clipView key="contentView" drawsBackground="NO" copiesOnScroll="NO" id="siY-ND-hD1">
                             <rect key="frame" x="1" y="1" width="248" height="158"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
@@ -216,9 +217,11 @@ CA
                                         <binding destination="dcl-aq-TFF" name="selectionIndexes" keyPath="selectionIndexes" previousBinding="DWt-11-ZTW" id="DvS-eJ-lnd"/>
                                         <outlet property="delegate" destination="dcl-aq-TFF" id="KFd-vF-Y52"/>
                                         <outlet property="itemPrototype" destination="9cD-io-WeH" id="bbc-ri-TYR"/>
+                                        <outlet property="previewView" destination="Xt2-p9-Mdd" id="I05-L4-jb3"/>
                                     </connections>
                                 </collectionView>
                             </subviews>
+                            <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </clipView>
                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="1AW-sQ-Scr">
                             <rect key="frame" x="1" y="144" width="233" height="15"/>
@@ -228,6 +231,7 @@ CA
                             <rect key="frame" x="234" y="1" width="15" height="143"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
+                        <accessibility description="ImageColletion"/>
                     </scrollView>
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="cdt-QX-mWs" customClass="NPDragView">
                         <rect key="frame" x="40" y="0.0" width="300" height="250"/>
@@ -318,6 +322,24 @@ CA
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                     </scrollView>
+                    <box hidden="YES" autoresizesSubviews="NO" fixedFrame="YES" title="Box" boxType="custom" borderType="none" translatesAutoresizingMaskIntoConstraints="NO" id="Xt2-p9-Mdd" customClass="NEPreviewView">
+                        <rect key="frame" x="-100" y="-100" width="100" height="100"/>
+                        <view key="contentView">
+                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YmG-ZW-hmy">
+                                    <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" animates="YES" imageScaling="proportionallyDown" id="cI8-KV-Zyy"/>
+                                </imageView>
+                            </subviews>
+                        </view>
+                        <color key="borderColor" red="0.66274509803921566" green="0.66274509803921566" blue="0.66274509803921566" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="fillColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="imageView" destination="YmG-ZW-hmy" id="9Kc-o2-bJ3"/>
+                        </connections>
+                    </box>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="4IV-gy-8Tn" secondAttribute="trailing" id="3DS-Ne-CbF"/>
@@ -401,7 +423,6 @@ CA
         </window>
         <collectionViewItem id="9cD-io-WeH" customClass="NECollectionViewItem">
             <connections>
-                <outlet property="imageView" destination="72I-me-dnh" id="O2I-J4-D1u"/>
                 <outlet property="view" destination="w0b-x6-YyS" id="yk6-4s-cUn"/>
             </connections>
         </collectionViewItem>

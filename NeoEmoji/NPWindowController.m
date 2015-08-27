@@ -32,4 +32,9 @@
     return NSMakeSize(width, frameSize.height);
 }
 
+- (void)windowDidResize:(NSNotification *)notification {
+    CGFloat width = NSWidth(self.window.frame);
+    self.imagesController.imageCollectionView.numberOfColumns = (width - 40.f) / 50.f;
+}
+
 @end

@@ -12,31 +12,46 @@
 
 #define DEFAULT_CATEGORY_NAME @"uncategoried"
 
-@implementation NECategoryController
+@implementation NECategoryController {
+    BOOL _initialized;
+}
 
 - (void)awakeFromNib {
+    if (_initialized) {
+        return;
+    }
+
+    _initialized = YES;
+
     NSMutableArray *categoryData = [[NEDataManager sharedInstance] readDataForKey:CATEGORY_DATA_KEY];
 
     __block BOOL hasDefaultCategory = NO;
 
-    [categoryData enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NECategory *category = (NECategory *)obj;
-        if ([category.name isEqualToString:DEFAULT_CATEGORY_NAME]) {
-            hasDefaultCategory = YES;
-        }
-    }];
+    if (!categoryData) {
+        categoryData = [NSMutableArray array];
+    }
+    else if ([categoryData count] > 0) {
+        [categoryData enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+            NECategory *category = (NECategory *)obj;
+            if ([category.name isEqualToString:DEFAULT_CATEGORY_NAME]) {
+                hasDefaultCategory = YES;
+                *stop = YES;
+            }
+        }];
+    }
 
     if (!hasDefaultCategory) {
         NECategory *defaultCategory = [[NECategory alloc] initWithName:DEFAULT_CATEGORY_NAME];
-        [self insertObject:defaultCategory atArrangedObjectIndex:0];
+
+        [categoryData insertObject:defaultCategory atIndex:0];
     }
+
 
     self.content = categoryData;
 
     NSInteger categorySelectionIndex = [[NSUserDefaults standardUserDefaults] integerForKey:CATEGORY_INDEX_KEY];
 
     self.selectionIndex = categorySelectionIndex;
-
 
 }
 
@@ -59,8 +74,14 @@
 }
 
 - (IBAction)remove:(id)sender {
+    NSInteger selectionIndex = self.selectionIndex - 1;
     [super remove:sender];
 
+    NSInteger count = [self.arrangedObjects count];
+    if (selectionIndex > count - 1) {
+        selectionIndex = count - 1;
+    }
+    self.selectionIndex = selectionIndex;
     [[NEDataManager sharedInstance] writeData:self.content forKey:CATEGORY_DATA_KEY];
 }
 

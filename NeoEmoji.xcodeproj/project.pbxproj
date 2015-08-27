@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B5AEA4A51B8F3F2100E3BBD2 /* NEPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5AEA4A41B8F3F2100E3BBD2 /* NEPreviewView.m */; };
 		B5DE71A01B7B8B4200DC1602 /* NECategoryController.m in Sources */ = {isa = PBXBuildFile; fileRef = B5DE719F1B7B8B4200DC1602 /* NECategoryController.m */; };
 		B5DE71A31B7B8B6900DC1602 /* NECategory.m in Sources */ = {isa = PBXBuildFile; fileRef = B5DE71A21B7B8B6900DC1602 /* NECategory.m */; };
 		B5DE71A61B7B9DEF00DC1602 /* NEDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = B5DE71A51B7B9DEF00DC1602 /* NEDataManager.m */; };
@@ -38,6 +39,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B5AEA4A31B8F3F2100E3BBD2 /* NEPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NEPreviewView.h; sourceTree = "<group>"; };
+		B5AEA4A41B8F3F2100E3BBD2 /* NEPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NEPreviewView.m; sourceTree = "<group>"; };
 		B5DE719E1B7B8B4200DC1602 /* NECategoryController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NECategoryController.h; sourceTree = "<group>"; };
 		B5DE719F1B7B8B4200DC1602 /* NECategoryController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NECategoryController.m; sourceTree = "<group>"; };
 		B5DE71A11B7B8B6900DC1602 /* NECategory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NECategory.h; sourceTree = "<group>"; };
@@ -163,6 +166,8 @@
 				B5FCAD1D1B79DF4C00B61630 /* NECellView.m */,
 				B5FCAD1F1B79E50700B61630 /* NECollectionView.h */,
 				B5FCAD201B79E50700B61630 /* NECollectionView.m */,
+				B5AEA4A31B8F3F2100E3BBD2 /* NEPreviewView.h */,
+				B5AEA4A41B8F3F2100E3BBD2 /* NEPreviewView.m */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -330,6 +335,7 @@
 				B5FCAD301B7AF9FE00B61630 /* NECollectionViewItem.m in Sources */,
 				B5FCAD151B79CD8200B61630 /* NPWindowController.m in Sources */,
 				B5FCAD1E1B79DF4C00B61630 /* NECellView.m in Sources */,
+				B5AEA4A51B8F3F2100E3BBD2 /* NEPreviewView.m in Sources */,
 				B5FCAD141B79CD8200B61630 /* NPImagesController.m in Sources */,
 				B5FCAD291B7AE91F00B61630 /* DDHotKeyCenter.m in Sources */,
 				B5DE71A61B7B9DEF00DC1602 /* NEDataManager.m in Sources */,
